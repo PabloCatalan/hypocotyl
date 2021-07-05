@@ -7,4 +7,6 @@ Run hypocotyl_growth_model.ipynb to see how the model calculates and predicts th
 
 The file simulated_annealing.cpp holds the routine used to fit the model to the experimental dataset.
 
+The files heatmaps.cpp and heatmaps.py have all the information to generate Fig4 in the manuscript.
+
 If you have any doubt or suggestion, feel free to contact me at: pcatalan [at] math [dot] uc3m [dor] com
