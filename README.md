@@ -1,7 +1,7 @@
 # hypocotyl
 Python and C++ code to run a hypocotyl elongation model in A. thaliana.
 
-Run paper_plots.py to get the simulation plots shown in the paper.
+Run main_figures.ipynb to get the simulation plots shown in the paper.
 
 Run hypocotyl_growth_model.ipynb to see how the model calculates and predicts the growth phenotypes of several genotypes.
 
