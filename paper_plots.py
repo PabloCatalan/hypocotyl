@@ -21,7 +21,7 @@ rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
 avgdata, stddata=read_data()
 
 #SUFFIX FOR SIMULATIONS
-suffix='02def_paper'
+suffix='01_paper'
 
 #PARAMETERS
 Temp=[22,28]
