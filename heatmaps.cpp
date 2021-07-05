@@ -10,19 +10,12 @@
 //MAIN
 int main(int argc, char* argv[]){
 
-  //DETECT MUTANT
-  
-
   //MUTANT
   std::vector<std::string> M={"COP1ox WT", "COP1ox phyb", "COP1ox elf3-8", "COP1ox phyb elf3-8", "COP1ox pifq",
 			      "PHYBox WT", "PHYBox cop1-4", "PHYBox elf3-8", "PHYBox cop1-4 elf3-8", "PHYBox pifq",
 			      "ELF3ox WT", "ELF3ox phyb", "ELF3ox cop1-4", "ELF3ox cop1-4 phyb", "ELF3ox pifq",
 			      "PIF4ox WT", "PIF4ox phyb", "PIF4ox cop1-4", "PIF4ox elf3-8"};
-  M={"COP1ox pifq", "PHYBox pifq","ELF3ox pifq",
-			      "PIF4ox WT", "PIF4ox phyb", "PIF4ox cop1-4", "PIF4ox elf3-8"};
   
-  
-  //std::string mut="COP1ox phyb elf3-8";
   //SUFFIX
   std::string suffix;
   std::stringstream ssuf;

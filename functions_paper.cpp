@@ -76,16 +76,6 @@ double is_day(double t, double Daylength){
     return 1.0;
   else
     return 0.0;
-  // double k0=1.0;
-  // double t2=t-Daylength;
-  // double t3=t-24.0;
-  
-  // if (Daylength==0)
-  //   return 0.0;
-  // else if (Daylength==24)
-  //   return 1.0;
-  // else
-  //   return 1.0/(1.0+std::exp(-k0*t))-1.0/(1.0+std::exp(-k0*t2))+1.0/(1.0+std::exp(-k0*t3));
 }
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -102,13 +92,6 @@ double elf3p(double t, double Daylength, double pE1, double pE2, double L){
     return pE1-pE2;
   else
     return pE1-pE2*(-1.0+2.0/(1.0+std::exp(-k0*t))-2.0/(1.0+std::exp(-k0*t2))+2.0/(1.0+std::exp(-k0*t3)));
-  //return L*(pE1-pE2*std::sin(pi*t/Daylength))+(1-L)*(pE1+pE2*std::sin(pi*(t-Daylength)/(24-Daylength)));
-  
-  
-  // if (is_day(t,Daylength)-1e-4>0.0)
-  //   return pE1-pE2*std::sin(pi*t/Daylength);
-  // else
-  //   return pE1+pE2*std::sin(pi*(t-Daylength)/(24-Daylength));
 }
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -304,15 +287,10 @@ std::pair<std::map<std::string, double>, std::map<std::string, std::vector<doubl
 	    std::find_if(ttc.begin(), ttc.end(), [newtime](double b) { return std::abs(newtime - b) < 1e-8; })!=ttc.end()){//it is a time to check
 	  expr[exprkey].push_back(x[1]);//ELF3 expression
 	}
-	// std::cout << t << "\t";
-	// for (int i=0; i<x.size(); ++i)
-	//   std::cout << "\t" << x[i];
-	// std::cout << std::endl;
 	x_vec.push_back(x);
 	times.push_back(newtime);
 	t+=dt;
       }
-      //std::cout << T << "\t" << D << "\t" << x_vec.size() << "\t" << x_vec.back()[4] << std::endl;
       std::string key=sT.str()+"_"+sL.str();
       rmap[key]=x_vec.back()[4];
     }//for daylengths
@@ -334,40 +312,6 @@ std::map<std::string, std::map<std::string, std::vector<double> > > read_data(){
   std::vector<std::string> mutants;
   std::vector<std::string> ldata;
   std::vector<std::string> tdata;
-  // //READ KEYS
-  // std::string line;
-  // std::getline(in,line);
-  // std::stringstream ss;
-  // ss << line;
-  // std::string w;
-  // std::string d,temp;
-  // while (ss >> w >> d >> temp){
-  //   mutants.push_back(w);
-  //   ldata.push_back(d);
-  //   tdata.push_back(temp);
-  // }
-  // //READ DATA POINTS
-  // while (std::getline(in,line)){
-  //   std::stringstream ss;
-  //   ss << line;
-  //   double g1;
-  //   int i=0;
-  //   while (ss >> g1){
-  //     if (g1<0){
-  // 	++i;
-  // 	continue;
-  //     }
-  //     std::string key=tdata[i]+"_"+ldata[i];
-  //     if (!data[mutants[i]].count(key)){
-  // 	data[mutants[i]][key]={g1};
-  //     }
-  //     else
-  // 	data[mutants[i]][key].push_back(g1);
-  //     ++i;
-  //   }
-  // }
-  // in.close();
-
   //READ DATA
   std::string line;
   std::getline(in, line);//names of columns
@@ -430,12 +374,6 @@ std::map<std::string, std::vector<double> > read_expression_data(){
     }
   }
   in.close();
-  // for (auto it=data.begin(); it!=data.end(); ++it){
-  //   auto v=it->second;
-  //   std::cout << it->first << std::endl;
-  //   for (int i=0; i<v.size(); ++i)
-  //     std::cout << i << "\t" << v[i] << std::endl;
-  // }
   return data;
 }
 //////////////////////////////////////////////////////////////////////////////
@@ -449,7 +387,6 @@ double error(const std::vector<double>& p, const std::map<std::string, std::map<
   std::vector<int> temp={22,28};
   double D=0.0;
   for (auto mut=mutants.begin(); mut!=mutants.end(); ++mut){
-    //std::cout << *mut << std::endl;
     auto results=model_results(temp, length, *mut, p);
     auto hypo=results.first;
     auto expr=results.second;
@@ -471,7 +408,6 @@ double error(const std::vector<double>& p, const std::map<std::string, std::map<
 	D+=(pred-*it2)*(pred-*it2)/(double)len;
       }
     }//for conditions
-    //std::cout << "(BEFORE EXPR) Error is D=" << D << std::endl;
     //EXPRESSION DIFFERENCES
     double weight=1;
     for (auto it=expr.begin(); it!=expr.end(); ++it){
@@ -480,11 +416,9 @@ double error(const std::vector<double>& p, const std::map<std::string, std::map<
       int ps=pred.size();
       auto m1=dataexpr.at(key);
       for (int t=0; t<ps; ++t){
-    	//std::cout << "Expr " << key << "\tD " << m1[t] << "\tP " << pred[t] << std::endl;
     	D+=weight*(pred[t]-m1[t])*(pred[t]-m1[t]);
       }
     }
-    //std::cout << "(AFTER EXPR) Error is D=" << D << std::endl;
   }//for mutants
   return D;
 }
@@ -538,8 +472,6 @@ std::vector<double> simulated_annealing(int Iter, const std::string& suffix, std
   for (int i=0; i<Iter; ++i){//loop
     //Constraints on parameters
     std::vector<double> p2=parameters;
-    // for (int p=0; p<p2.size(); ++p)
-    //   std::cout << p << "\t" << p2[p] << std::endl;
     constraints(p2, generator, RNG, RNGnormal);    
     //Compute new energy
     double D2=error(p2, data, expr, mutants);
