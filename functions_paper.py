@@ -140,30 +140,3 @@ def model_results(Temp, Daylength, params, mutants):
                 hypo[mut][key]=R
                 tot[mut][key]=sol
     return hypo, tot
-
-def arrows(Temp, Daylength, params, mutants):
-    S={}
-    mut='Col'
-    for T,D in itertools.product(Temp,Daylength):
-        key=str(T)+'_'+str(D)
-        time=np.linspace(0,120,500)
-        y0=[0,0,0,0,0]
-        sol=odeint(growth, y0, time, args=(T, D, mut, *params))
-        S[key]=pd.DataFrame(sol, columns=['phyB', 'ELF3', 'PIF4', 'COP1', 'Growth'])
-    return S
-
-def decorrelate(Temp, Daylength, params, mutants):
-    hypo={}
-    tot={}
-    for mut in mutants:
-        hypo[mut]={}
-        tot[mut]={}
-        for T,D in itertools.product(Temp,Daylength):
-                key=str(T)+'_'+str(D)
-                time=np.linspace(0,120,500)
-                y0=[0,0,0,0,0]
-                sol=odeint(growth, y0, time, args=(T, D, mut, *params))
-                R=sol[-1,4]
-                hypo[mut][key]=R
-                tot[mut][key]=sol
-    return hypo, tot
