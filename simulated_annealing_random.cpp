@@ -61,10 +61,6 @@ int main(int argc, char* argv[]){
   //MUTANTS
   std::vector<std::string> mutants;
   for (auto it=data.begin(); it!=data.end(); ++it){
-    if (it->first=="det1-1") continue;
-    //else if (it->first=="hy5") continue;
-    else if (it->first=="elf4") continue;
-    else if (it->first=="lux") continue;
     mutants.push_back(it->first);
   }
   //RANDOM NUMBER GENERATOR
