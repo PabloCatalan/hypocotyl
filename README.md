@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/383070693.svg)](https://zenodo.org/badge/latestdoi/383070693)
+
 # hypocotyl
 Python and C++ code to run a hypocotyl elongation model in A. thaliana.
 
