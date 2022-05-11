@@ -11,10 +11,9 @@
 int main(int argc, char* argv[]){
 
   //MUTANT
-  std::vector<std::string> M={"COP1ox WT", "COP1ox phyb", "COP1ox elf3-8", "COP1ox phyb elf3-8", "COP1ox pifq",
-			      "PHYBox WT", "PHYBox cop1-4", "PHYBox elf3-8", "PHYBox cop1-4 elf3-8", "PHYBox pifq",
-			      "ELF3ox WT", "ELF3ox phyb", "ELF3ox cop1-4", "ELF3ox cop1-4 phyb", "ELF3ox pifq",
-			      "PIF4ox WT", "PIF4ox phyb", "PIF4ox cop1-4", "PIF4ox elf3-8"};
+  std::vector<std::string> M={"COP1ox WT", "COP1ox phyb", "COP1ox elf3-8", 
+			      "PHYBox WT", "PHYBox cop1-4", "PHYBox elf3-8",
+			      "ELF3ox WT", "ELF3ox phyb", "ELF3ox cop1-4"};
   
   //SUFFIX
   std::string suffix;
@@ -54,7 +53,7 @@ int main(int argc, char* argv[]){
   for (auto it=M.begin(); it!=M.end(); ++it){
     std::string mut=*it;
     std::cout << mut << std::endl;
-    std::ofstream out("results/heatmap_"+mut+".csv");
+    std::ofstream out("results/heatmap_"+mut+"_"+suffix+".csv");
     out << "Prot,T,D,Growth" << std::endl;
     for (int c=0; c<prot.size(); ++c){
       for (int j=0; j<temp.size(); ++j){
