@@ -304,9 +304,9 @@ std::pair<std::map<std::string, double>, std::map<std::string, std::vector<doubl
 //READ DATA
 std::map<std::string, std::map<std::string, std::vector<double> > > read_data(){
   std::map<std::string, std::map<std::string, std::vector<double> > > data;
-  std::ifstream in("data/daylength_def.csv");
+  std::ifstream in("data/growth_training_set.csv");
   if (!in){
-    std::cout << "No daylength.csv file!" << std::endl;
+    std::cout << "No growth_training_set.csv file!" << std::endl;
     std::exit(1);
   }
   std::vector<std::string> mutants;
